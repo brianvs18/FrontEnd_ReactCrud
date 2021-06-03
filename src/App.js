@@ -37,14 +37,6 @@ const Form = () =>{
     });
   }
 
-  const onDelete = (id) =>{
-    fetch(HOST_API + "/"+id+"/todo",{
-      method: "DELETE"
-    }).then((list)=>{
-      dispatch({type: "delete-item", id})
-    })
-  };
-
   const onEdit = (event) =>{
     event.preventDefault();
 
@@ -88,6 +80,18 @@ const List = ()=>{
       dispatch({type: "update-list", list})
     })
   }, [state.list.length, dispatch]);
+
+  const onDelete = (id) =>{
+    fetch(HOST_API + "/"+id+"/todo",{
+      method: "DELETE"
+    }).then((list)=>{
+      dispatch({type: "delete-item", id})
+    })
+  };
+
+  const onEdit = (todo) =>{
+    dispatch({type: "edit-item", item: todo})
+  };
 
   return <div>
     <table>
